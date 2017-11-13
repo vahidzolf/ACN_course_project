@@ -1,0 +1,214 @@
+autostart = False
+[127.0.0.1:7200]
+    workingdir = working
+    udp = 10000
+    [[3660]]
+        image = C:\vahid\c3660-is-mz.122-8.T5.bin
+        idlepc = 0x60765150
+        ghostios = True
+        chassis = 3660
+    [[ROUTER R2]]
+        model = 3660
+        console = 2003
+        aux = 2100
+        cnfg = configs\R2.cfg
+        f0/0 = S3 f1/4
+        slot1 = NM-4T
+        s1/0 = R1 s1/0
+        x = 134.788888605
+        y = 244.818325857
+    [[ROUTER S3]]
+        model = 3660
+        console = 2001
+        aux = 2101
+        cnfg = configs\S3.cfg
+        slot1 = NM-16ESW
+        f1/1 = S1 f1/12
+        f1/2 = S2 f1/2
+        f1/4 = R2 f0/0
+        f1/8 = HostA e0
+        symbol = ethernet_switch
+        x = -99.3898269447
+        y = 138.526911935
+        hx = 12.0
+        hy = 35.0
+    [[ROUTER S2]]
+        model = 3660
+        console = 2002
+        aux = 2102
+        ram = 256
+        nvram = 256
+        disk0 = 8
+        disk1 = 8
+        exec_area = 80
+        cnfg = configs\S2.cfg
+        iomem = 10
+        slot1 = NM-16ESW
+        f1/0 = HostC e0
+        f1/1 = S1 f1/11
+        f1/2 = S3 f1/2
+        symbol = ethernet_switch
+        x = -349.783837972
+        y = -152.107647738
+    [[ROUTER S1]]
+        model = 3660
+        console = 2000
+        aux = 2103
+        cnfg = configs\S1.cfg
+        slot1 = NM-16ESW
+        f1/1 = R3 f0/0
+        f1/11 = S2 f1/1
+        f1/12 = S3 f1/1
+        symbol = multilayer_switch
+        x = -91.4487014478
+        y = -145.928932188
+[127.0.0.1:7201]
+    workingdir = working
+    udp = 10100
+    [[3660]]
+        image = C:\vahid\c3660-is-mz.122-8.T5.bin
+        idlepc = 0x60765150
+        ghostios = True
+        chassis = 3660
+    [[ROUTER R1]]
+        model = 3660
+        console = 2004
+        aux = 2104
+        cnfg = configs\R1.cfg
+        f0/0 = HostB e0
+        slot1 = NM-4T
+        s1/0 = R2 s1/0
+        x = 518.418397644
+        y = 241.587878479
+    [[ROUTER R3]]
+        model = 3660
+        console = 2005
+        aux = 2105
+        cnfg = configs\R3.cfg
+        f0/0 = S1 f1/1
+        f0/1 = S5 f1/0
+        x = 63.0
+        y = -370.0
+    [[ROUTER S5]]
+        model = 3660
+        console = 2006
+        aux = 2106
+        cnfg = configs\S5.cfg
+        slot1 = NM-16ESW
+        f1/0 = R3 f0/1
+        f1/1 = HostX e0
+        f1/2 = HostY e0
+        symbol = ethernet_switch
+        x = 377.0
+        y = -386.0
+[vbox 127.0.0.1:11525]
+    workingdir = working
+    udp = 20900
+    [[VBoxDevice]]
+        image = HostX
+        nics = 1
+    [[VBOX HostC]]
+        image = HostC
+        e0 = S2 f1/0
+        x = -604.5
+        y = -169.5
+    [[VBOX HostA]]
+        image = HostA
+        e0 = S3 f1/8
+        x = -536.5
+        y = 110.5
+    [[VBOX HostB]]
+        image = HostB
+        e0 = R1 f0/0
+        x = 809.5
+        y = 278.5
+    [[VBOX HostY]]
+        image = HostY
+        e0 = S5 f1/2
+        x = 637.5
+        y = -235.5
+    [[VBOX HostX]]
+        e0 = S5 f1/1
+        x = 651.5
+        y = -453.5
+[GNS3-DATA]
+    configs = configs
+    workdir = working
+    m11 = 0.5
+    m22 = 0.5
+    [[NOTE 1]]
+        text = Y : 10.1.1.20 /24
+        x = 728.0
+        y = -236.5
+    [[NOTE 2]]
+        text = s1/0 : 192.168.2.1  /24
+        x = 192.0
+        y = 199.5
+    [[NOTE 3]]
+        text = vlan 20
+        x = 740.0
+        y = 403.5
+    [[NOTE 4]]
+        text = f0/0 : 192.168.1.2 /24
+        x = -104.0
+        y = 235.5
+    [[NOTE 5]]
+        text = f0/0 , 10 : 192.168.10.1/24
+        x = -154.0
+        y = 287.5
+    [[NOTE 6]]
+        text = f0/0 , 20 : 192.168.20.1/24
+        x = -158.0
+        y = 329.5
+    [[NOTE 7]]
+        text = loopback 6 : 172.16.6.1 /24\nloopback 5 : 172.16.5.1 /24\nloopback 4 : 172.16.4.1 /24\nloopback 3 : 172.16.3.1 /24\nloopback 2 : 172.16.2.1 /24\nloopback 1 : 172.16.1.1 /24
+        x = 508.0
+        y = 85.5
+    [[NOTE 8]]
+        text = vlan 1 : 192.168.1.10 /24
+        x = -30.0
+        y = -126.5
+    [[NOTE 9]]
+        text = vlan 1 : 192.168.1.12 /24
+        x = -28.0
+        y = 113.5
+    [[NOTE 10]]
+        text = f0/0 : 192.168.3.1/24
+        x = 598.0
+        y = 227.5
+    [[NOTE 11]]
+        text = loopback 1 : 172.16.10.1 /24
+        x = -32.0
+        y = -468.5
+    [[NOTE 12]]
+        text = X : 10.1.1.10 /24
+        x = 736.0
+        y = -480.5
+    [[NOTE 13]]
+        text = A : 192.168.10.50 /24\nvlan 10
+        x = -568.0
+        y = 221.5
+    [[NOTE 14]]
+        text = fa 0/1 : 10.1.1.1 /24
+        x = 116.0
+        y = -418.5
+    [[NOTE 15]]
+        text = C : 192.168.20.20 /24 \nvlan 20
+        x = -624.0
+        y = -60.5
+    [[NOTE 16]]
+        text = vlan 1 : 192.168.1.11 /24
+        x = -378.0
+        y = -234.5
+    [[NOTE 17]]
+        text = B : 192.168.3.2 /24
+        x = 730.0
+        y = 353.5
+    [[NOTE 18]]
+        text = f0/0 : 192.168.1.1 /24
+        x = -140.0
+        y = -342.5
+    [[NOTE 19]]
+        text = s1/0 : 192.168.2.2  /24
+        x = 366.0
+        y = 305.5
